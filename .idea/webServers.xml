@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4ff79f20-97eb-4520-ba2a-f07a9603e55f" name="server">
+        <fileTransfer rootFolder="/var/www/html/telegram/TelBot" accessType="SFTP" host="135.181.15.199" port="3031" sshConfigId="df49a231-22ee-4f13-9dc2-cef77473756f" sshConfig="amiuser@135.181.15.199:3031 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
