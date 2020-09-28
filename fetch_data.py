@@ -31,7 +31,8 @@ def inputTextMessageContent(last_deal, close, open, high, low, clock):
 def get_data(var):
     cnx = mysql.connector.connect(**config)
     cursor = cnx.cursor(dictionary=True)
-    query = "SELECT c.*, p1.* FROM symboles c LEFT JOIN symboles_data p1 ON (c.id = p1.symbol_id) LEFT OUTER JOIN symboles_data p2 ON (c.id = p2.symbol_id AND (p1.date < p2.date OR (p1.date = p2.date AND p1.id_symbloes_data < p2.id_symbloes_data))) WHERE p2.id_symbloes_data IS NULL and  symbol LIKE %s LIMIT 50"
+    query = "SELECT c.*, p1.* FROM symboles c LEFT JOIN symboles_data p1 ON (c.id = p1.symbol_id) LEFT OUTER JOIN symboles_data p2 ON (c.id = p2.symbol_id AND (p1.date < p2.date OR (p1.date = p2.date AND p1.id_symbol_data < p2.id_symbol_data))) WHERE p2.id_symbol_data IS NULL and  symbol LIKE %s LIMIT 50"
+    # print(query)
     cursor.execute(query, ('%'+var + '%',))
     symbol_list = cursor.fetchall()
     cursor.close()
@@ -39,10 +40,10 @@ def get_data(var):
     if not symbol_list:
         return
     results = list()
-    keyboard = [[InlineKeyboardButton("وضعیت صف", callback_data='1'),
-                 InlineKeyboardButton("حقیقی و حقوقی", callback_data='2')],
+    keyboard = [[InlineKeyboardButton("وضعیت صف", callback_data='x1'),
+                 InlineKeyboardButton("حقیقی و حقوقی", callback_data='x2')],
 
-                [InlineKeyboardButton("کدال", callback_data='3')]]
+                [InlineKeyboardButton("کدال", callback_data='x3')]]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
     for symbol in symbol_list:
