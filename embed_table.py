@@ -2,10 +2,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from plt import plot_individual_legal
+from overview import general_info, person_legal_response
+from fetch_data import get_person_legal_statistic
+
+from Symbol import SymbolData
+from custom_config import config
+# config = {
+#     'user': 'amiuser',
+#     'password': 'ERT*&^8052kL',
+#     'host': '127.0.0.1',
+#     'database': 'amibroker',
+#     'raise_on_warnings': True
+# }
 
 # ind = [650000, 560000]
 # lgl = [10000, 90000]
-p = plot_individual_legal('پکرمان')
+# p = plot_individual_legal('پکرمان')
+
+symbol = SymbolData("دبالک", config)
+filename = symbol.general_info_draw()
+
+a = person_legal_response('وبصادر')
+p2 = general_info('پکرمان')
 
 
 

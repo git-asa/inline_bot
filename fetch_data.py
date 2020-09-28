@@ -63,17 +63,38 @@ def get_data(var):
         )
     return results
 
+
 def get_symbol_data(var):
+    ########################################
+    # cnx = mysql.connector.connect(**config)
+    # cursor = cnx.cursor(dictionary=True)
+    # query = "SELECT * FROM symboles WHERE symbol LIKE %s LIMIT 50"
+    # cursor.execute(query, (var + '%',))
+    # symbol_list = cursor.fetchall()
+    # cursor.close()
+    # cnx.close()
+    #
+    # ind = [650000, 560000]
+    # lgl = [10000, 90000]
+    # if not ind:
+    #     return
+    # return [ind, lgl]
+    ###########################################
+    cell_text = [[2059564650, 55000, 2.74],
+                 [207165460, -20000, -0.97],
+                 # [19000, 150, 0.79],
+                 # [20750, 710, 3.54],
+                 # [20080, 180, 0.90],
+                 ]
+    return cell_text
+
+
+def get_person_legal_statistic(symbol):
     cnx = mysql.connector.connect(**config)
     cursor = cnx.cursor(dictionary=True)
-    query = "SELECT * FROM symboles WHERE symbol LIKE %s LIMIT 50"
-    cursor.execute(query, (var + '%',))
-    symbol_list = cursor.fetchall()
+    query = "SELECT `person_buy_volume`, `legal_buy_volume`, `person_sell_volume`,`legal_sell_volume`, `person_buy_count`, `legal_buy_count`, `person_sell_count`, `legal_sell_count` FROM symboles_data WHERE symbol_id=(SELECT id FROM symboles WHERE symbol LIKE %s)  ORDER BY id_symbol_data DESC LIMIT 1"
+    cursor.execute(query, (symbol + '%',))
+    symbol_data = cursor.fetchall()
     cursor.close()
     cnx.close()
-
-    ind = [650000, 560000]
-    lgl = [10000, 90000]
-    if not ind:
-        return
-    return [ind, lgl]
+    return symbol_data
